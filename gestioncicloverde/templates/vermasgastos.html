@@ -31,65 +31,23 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modificar gastos</h4>
+          <h4 class="modal-title">Eliminar registro</h4>
         </div>
         <div class="modal-body">
-            <h2>Información básica</h2>
 
-            <form method="get" action="/actualizarTrabajadores">
-                <div class="row gtr-uniform">
-                    <div class="col-6 col-12-xsmall">
-                        <p>Nombre</p>
-                        <input type="text" name="nombre" id="nombre" value="{{currentTrabajador.nombre}}" placeholder="Nombre"  />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <p>SIS</p>
+            <form method="get" action="/eliminarRegistro">
+                <div class="col-12">
+                    <h3>¿Estás seguro de que deseas eliminar el registro {{mesGasto.id}}?</h3>
+                    <input type="hidden" name="idregistro" value="{{mesGasto.id}}">
+                    <input type="hidden" name="idmes" value="{{mesGasto.mes}}">
 
-                        <input type="text" name="sis" id="sis" value="{{currentTrabajador.SIS}}" placeholder="SIS" />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <p>Sueldo base</p>
-
-                        <input type="text" name="sueldo_base" id="sueldo_base" value="{{currentTrabajador.sueldoBase}}" placeholder="Sueldo base"  />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <p>ACHS</p>
-
-                        <input type="text" name="achs" id="achs" value="{{currentTrabajador.ACHS}}" placeholder="ACHS"  />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <p>Gratificaciones</p>
-
-                        <input type="text" name="gratificaciones" id="gratificaciones" value="{{currentTrabajador.gratificaciones}}" placeholder="Gratificaciones"  />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <p>AFC</p>
-
-                        <input type="text" name="afc" id="afc" value=" {{currentTrabajador.AFC}}" placeholder="AFC" />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <p>Bonos</p>
-
-                        <input type="text" name="bonos" id="bonos" value="{{currentTrabajador.bonos}}" placeholder="direccion"  />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <p>Horas trabajadas</p>
-
-                        <input type="text" name="horas_trabajadas" id="horas_trabajadas" value="{{currentTrabajador.horas_trabajadas}}" placeholder="email"  />
-                    </div>
-                    <input type="hidden" name="id" value="{{currentTrabajador.id}}">
-
-                    <!-- Break -->
-                    <div class="col-12">
-                        <ul class="actions">
-                            <li><input type="button" value="Cancelar" data-dismiss="modal"/></li>
-                            <li><input type="submit" value="Guardar" class="primary" /></li>
-                        </ul>
-                    </div>
+                    <ul class="actions">
+                        <li><input type="button" value="Cancelar" data-dismiss="modal"/></li>
+                        <li><input type="submit" value="Eliminar" class="primary" /></li>
+                    </ul>
                 </div>
             </form>
 
-            <hr />
         </div>
 
       </div>
@@ -109,7 +67,7 @@
 					<div id="main">
 
 						<div class="container">
-							<h1>{{mesGasto.mes}} <a href="" class="button small" data-toggle="modal" data-target="#myModal">Modificar</a></h1>
+							<h1>{{mesGasto.mes}} <a href="" class="button small" data-toggle="modal" data-target="#myModal">Eliminar</a></h1>
                             <h2>Costo operativo: ${{mesGasto.costo_operativo_mes}}</h2>
                             <footer id="footer">
 
@@ -154,7 +112,7 @@
                         </section> 
                             <div id="upa">
 								<ul class="actions">
-									<li><a href="/gastos" class="button icon solid solo fa-arrow-left scrolly">Continue</a></li>
+									<li><a href="/inicio" class="button icon solid solo fa-arrow-left scrolly">Continue</a></li>
 								</ul>						</div>
                             </footer>
 						</div>

@@ -154,37 +154,39 @@ def verGastos(request):
 def agregarGastos(request):
 
     currentMes = request.GET['mes']
-
-    prevencionistaa= int(request.GET['prevencionista'])
-    sanitizacion=int(request.GET['sanitizacion'])
-    contabilidad=int(request.GET['contabilidad'])
-    totalasesoria =(prevencionistaa + sanitizacion + contabilidad)
-    i = Asesorias(
-        prevencionista=prevencionistaa, 
-        sanitizacion=sanitizacion,
-        contabilidad=contabilidad,
-        total=totalasesoria,
-        mes=currentMes
-        )
-    i.save()
+    if GastosTotales.objects.filter(mes=currentMes).exists():
+        return render(request, 'duplicado.html', {'currentMes':currentMes})
+    else:
+        prevencionistaa= int(request.GET['prevencionista'])
+        sanitizacion=int(request.GET['sanitizacion'])
+        contabilidad=int(request.GET['contabilidad'])
+        totalasesoria =(prevencionistaa + sanitizacion + contabilidad)
+        i = Asesorias(
+            prevencionista=prevencionistaa, 
+            sanitizacion=sanitizacion,
+            contabilidad=contabilidad,
+            total=totalasesoria,
+            mes=currentMes
+            )
+        i.save()
 
 
     
-    gastos_comunes = request.GET['gastos_comunes']
-    insumos_aseo=request.GET['insumos_aseo']
-    insumos_oficina=request.GET['insumos_oficina']
-    mantencion_banco=request.GET['mantencion_banco']
-    TI=request.GET['TI']
-    arriendo=request.GET['arriendo']
-    patentes=request.GET['patentes']
-    encomiendas=request.GET['encomiendas']
-    ropa_trabajadores=request.GET['ropa_trabajadores']
-    permisos_circulacion=request.GET['permisos_circulacion']
-    generales=request.GET['generales']
-    total=float(gastos_comunes) + float(insumos_aseo) + float(insumos_oficina)+ float(mantencion_banco) + float(TI)+ float(arriendo)+ float(patentes) + float(encomiendas) + float(ropa_trabajadores) +float(permisos_circulacion) + float(generales)
+        gastos_comunes = request.GET['gastos_comunes']
+        insumos_aseo=request.GET['insumos_aseo']
+        insumos_oficina=request.GET['insumos_oficina']
+        mantencion_banco=request.GET['mantencion_banco']
+        TI=request.GET['TI']
+        arriendo=request.GET['arriendo']
+        patentes=request.GET['patentes']
+        encomiendas=request.GET['encomiendas']
+        ropa_trabajadores=request.GET['ropa_trabajadores']
+        permisos_circulacion=request.GET['permisos_circulacion']
+        generales=request.GET['generales']
+        total=float(gastos_comunes) + float(insumos_aseo) + float(insumos_oficina)+ float(mantencion_banco) + float(TI)+ float(arriendo)+ float(patentes) + float(encomiendas) + float(ropa_trabajadores) +float(permisos_circulacion) + float(generales)
 
 
-    insertAdministrativos = GastosAdministrativos(gastos_comunes=gastos_comunes,
+        insertAdministrativos = GastosAdministrativos(gastos_comunes=gastos_comunes,
                                                     insumos_aseo=insumos_aseo,
                                                     insumos_oficina=insumos_oficina,
                                                     mantencion_banco=mantencion_banco,
@@ -198,59 +200,77 @@ def agregarGastos(request):
                                                     total=total,
                                                     mes=currentMes).save()
 
-    electricidad = request.GET['electricidad']
-    gas_grua = request.GET['gas_grua']
-    petroleo = request.GET['petroleo']
-    cordel = request.GET['cordel']
-    insumos_epp = request.GET['insumos_epp']
-    mantencion_maquinaria = request.GET['mantencion_maquinaria']
-    insumos_planta = request.GET['insumos_planta']
-    total = float(electricidad) + float(gas_grua) + float(petroleo) + float(cordel) + float(insumos_epp)+float(mantencion_maquinaria)+ float(insumos_planta)
+        electricidad = request.GET['electricidad']
+        gas_grua = request.GET['gas_grua']
+        petroleo = request.GET['petroleo']
+        cordel = request.GET['cordel']
+        insumos_epp = request.GET['insumos_epp']
+        mantencion_maquinaria = request.GET['mantencion_maquinaria']
+        insumos_planta = request.GET['insumos_planta']
+        total = float(electricidad) + float(gas_grua) + float(petroleo) + float(cordel) + float(insumos_epp)+float(mantencion_maquinaria)+ float(insumos_planta)
 
 
-    insertProduccion = GastosProduccion(electricidad=electricidad,
-                                        gas_grua=gas_grua,
-                                        petroleo=petroleo,
-                                        cordel=cordel,
-                                        insumos_epp=insumos_epp,
-                                        mantencion_maquinaria=mantencion_maquinaria,
-                                        insumos_planta=insumos_planta,
-                                        total=total,
-                                        mes=currentMes).save()
+        insertProduccion = GastosProduccion(electricidad=electricidad,
+                                            gas_grua=gas_grua,
+                                            petroleo=petroleo,
+                                            cordel=cordel,
+                                            insumos_epp=insumos_epp,
+                                            mantencion_maquinaria=mantencion_maquinaria,
+                                            insumos_planta=insumos_planta,
+                                            total=total,
+                                            mes=currentMes).save()
 
 
-    # Calculo suma de sueldos de trabajadores
-    trabajadores = Trabajadores.objects.all()
-    sueldos=0
-    for trabajador in trabajadores:
-        sueldos = sueldos + trabajador.sueldos 
+        # Calculo suma de sueldos de trabajadores
+        trabajadores = Trabajadores.objects.all()
+        sueldos=0
+        for trabajador in trabajadores:
+            sueldos = sueldos + trabajador.sueldos 
     
-    # Calculo de total de asesorías
-    currentAsesoria= Asesorias.objects.get(mes=currentMes)
+        # Calculo de total de asesorías
+        currentAsesoria= Asesorias.objects.get(mes=currentMes)
 
-    # Calculo de total de GastosAdministrativos
-    currentAdministrativos = GastosAdministrativos.objects.get(mes=currentMes)
+        # Calculo de total de GastosAdministrativos
+        currentAdministrativos = GastosAdministrativos.objects.get(mes=currentMes)
 
-    # Calculo de total de GastosProduccion
-    currentProduccion = GastosProduccion.objects.get(mes=currentMes)
+        # Calculo de total de GastosProduccion
+        currentProduccion = GastosProduccion.objects.get(mes=currentMes)
 
-    # Calculos Costo costo_operativo_mes
-    costo_mensual= sueldos + currentAsesoria.total + currentAdministrativos.total + currentProduccion.total
+        # Calculos Costo costo_operativo_mes
+        costo_mensual= sueldos + currentAsesoria.total + currentAdministrativos.total + currentProduccion.total
 
-    insertTotales = GastosTotales(mes=currentMes,
-                                  sueldos=sueldos,
-                                  total_asesorias= currentAsesoria.total,
-                                  total_administrativos=currentAdministrativos.total,
-                                  total_produccion=currentProduccion.total,
-                                  costo_operativo_mes= costo_mensual,
-                                  costo_operativo_dia= costo_mensual / 30,
-                                  costo_operativo_hora= (costo_mensual/30)/9 ).save()
+        insertTotales = GastosTotales(mes=currentMes,
+                                    sueldos=sueldos,
+                                    total_asesorias= currentAsesoria.total,
+                                    total_administrativos=currentAdministrativos.total,
+                                    total_produccion=currentProduccion.total,
+                                    costo_operativo_mes= costo_mensual,
+                                    costo_operativo_dia= costo_mensual / 30,
+                                    costo_operativo_hora= (costo_mensual/30)/9 ).save()
 
     
 
-    return render(request, 'index.html')
+        return render(request, 'index.html')
 
 def vermasgastos(request):
     currentGasto= request.GET['id']
     mesGasto= GastosTotales.objects.get(id=currentGasto)
     return render(request, 'vermasgastos.html', {'mesGasto':mesGasto})
+
+
+def eliminarRegistro(request):
+    currentId= request.GET['idregistro']
+    currentMes= request.GET['idmes']
+    eliminate = GastosTotales.objects.get(id=currentId)
+    eliminate.delete()
+
+    eliminateA= Asesorias.objects.get(mes=currentMes)
+    eliminateA.delete()
+
+    eliminateADM= GastosAdministrativos.objects.get(mes=currentMes)
+    eliminateADM.delete()
+
+    eliminatePROD= GastosProduccion.objects.get(mes=currentMes)
+    eliminatePROD.delete()
+
+    return render(request, 'gastos.html')
