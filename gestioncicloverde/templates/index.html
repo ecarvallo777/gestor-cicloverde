@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+{% load static %}
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Gestor interno</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/displayform.css' %}"/>
+		<noscript><link rel="stylesheet" href="{% static 'css/noscript.css' %}" /></noscript>
+		<script src="{% static 'js/showAyudantes.js' %}"></script>
+		<script src="{% static 'js/showPeajes.js' %}"></script>
+
+
+	</head>
+
+
+
+
+	
+	<body class="is-preload">
+
+
+		
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>Gestión interna<br />
+						Ciclo Verde</h1>
+						<p>Administrar de forma eficaz el transporte de residuos desde y hacia la planta local de Ciclo Verde.</p>
+						<ul class="actions">
+							<li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+				<!-- Header -->
+					<header id="header">
+						<a href="/inicio" class="logo">U. de talca</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="#header">Cotizar transporte</a></li>
+							<li><a href="/trabajadores">Trabajadores</a></li>
+							<li><a href="/gastos">Gastos</a></li>
+							<li><a href="/clientes">clientes</a></li>
+
+						</ul>
+
+					</nav>
+
+
+				
+					<div id="main">
+
+						<div class="container">
+							<h1>Cotizar transporte</h1>
+							<div class="progress">
+							<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							
+							<form id="regiration_form" novalidate action="/cotizar" method="get">
+
+								<fieldset>
+									<h2> Paso 1: Información de cliente</h2>
+									<div class="row gtr-uniform">
+										<div class="col-6 col-12-xsmall">
+									<label for="fName">Búsqueda de cliente:</label>
+									<input list="browsers" name="browser" id="browser" placeholder="Nombre cliente">
+									  <datalist id="browsers">
+										  {%for client in clientes%}
+										<option value="{{client.nombreRepresentante}}">
+											{%endfor%}
+									  </datalist>
+										</div>
+										<div class="col-6 col-12-xsmall">
+									  <label for="fName">Dirección servicio</label>
+							<input name="direccion_servicio" id="direccion_servicio" placeholder="Dirección de servicio">
+						</div>
+									</div>
+									
+
+									<input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
+								</fieldset>
+
+							<fieldset>
+							<h2>Paso 2: Seleccione vehículo y conductor</h2>
+							<div class="form-group">
+							<label for="vehiculo">vehículo</label>
+							<select name="vehiculo" id="vehiculo">
+								<option value="KIA">Camioneta KIA</option>
+								<option value="NQR">Camión NQR</option>
+
+							  </select>							</div>
+							<div class="form-group">
+							<label for="conductor">Conductor</label>
+							<select name="conductor" id="conductor">
+								<option value="AVALOS">Oscar Avalos
+								</option>
+								<option value="BAHAMONDES">Luis Bahamondes
+								</option>
+								<option value="SAINT">Pelius Saint Yl
+
+								</option>
+								<option value="PADILLA">Jorge Padilla
+
+								</option>
+								<option value="REYES">Carla Reyes
+
+								</option>
+								<option value="SALAZAR">Patricia Salazar
+								</option>
+								<option value="LEYTON">Jose Luis Leyton
+
+
+								</option>
+
+
+							  </select>
+							 
+							  <input type="text" name="horas_chofer" class="input" placeholder="Horas de trabajo"/>
+							 								<label>Ayudante</label>
+ 
+							  <div class="row gtr-uniform">
+								<div class="col-4 col-12-small">
+									<input type="radio" id="a0" name="uno" checked onclick="mostrarAyudante1();">
+									<label for="a0">0</label>
+								</div>
+								<div class="col-4 col-12-small">
+									<input type="radio" id="a1" name="uno" onclick="mostrarAyudante1();">
+									<label for="a1">1</label>
+								</div>
+								<div class="col-4 col-12-small">
+									<input type="radio" id="a2" name="uno" onclick="mostrarAyudante1();">
+									<label for="a2">2</label>
+								</div></div>
+
+								<div id="ayudante1" style="display:none">
+									<label>Asistente 1</label>
+									<select name="asistente1" id="asistente1">
+										<option value="AVALOS">Oscar Avalos
+										</option>
+										<option value="BAHAMONDES">Luis Bahamondes
+										</option>
+										<option value="SAINT">Pelius Saint Yl
+		
+										</option>
+										<option value="PADILLA">Jorge Padilla
+		
+										</option>
+										<option value="REYES">Carla Reyes
+		
+										</option>
+										<option value="SALAZAR">Patricia Salazar
+										</option>
+										<option value="LEYTON">Jose Luis Leyton
+		
+		
+										</option>
+		
+		
+									  </select>
+									<input type="text" name="horas_asistente_1" class="input" placeholder="Horas de trabajo"/>
+									</div>
+
+
+									<div id="ayudante2" style="display:none">
+										<label>Asistente 2</label>
+										<select name="asistente2" id="asistente2">
+											<option value="AVALOS">Oscar Avalos
+											</option>
+											<option value="BAHAMONDES">Luis Bahamondes
+											</option>
+											<option value="SAINT">Pelius Saint Yl
+			
+											</option>
+											<option value="PADILLA">Jorge Padilla
+			
+											</option>
+											<option value="REYES">Carla Reyes
+			
+											</option>
+											<option value="SALAZAR">Patricia Salazar
+											</option>
+											<option value="LEYTON">Jose Luis Leyton
+			
+			
+											</option>
+			
+			
+										  </select>
+									<input type="text" name="horas_asistente_2" class="input" placeholder="Horas de trabajo"/>
+									</div>
+
+
+
+
+									<label>Colación</label>
+									<input type="radio" id="si" name="colacion" value="si">
+									  <label for="si">Sí</label><br>
+									  <input type="radio" id="no" name="colacion" value="no">
+									  <label for="no">No</label><br>
+							</div>
+
+
+							<input type="button" name="previous" class="previous btn btn-default" value="Previo" />
+
+							<input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
+							</fieldset>
+
+
+							<fieldset>
+							<h2> Paso 3: Descripción del viaje</h2>
+							
+							<div class="row gtr-uniform">
+								<div class="col-6 col-12-xsmall">
+							<label for="fName">Lugar de origen</label>
+							<input name="lugar_origen" id="lugar_origen" placeholder="Establ. y comuna">
+						</div><div class="col-6 col-12-xsmall">
+							<label for="fName">Lugar de servicio</label>
+							<input name="lugar_servicio" id="lugar_servicio" placeholder="Establ. y comuna">
+						</div><div class="col-6 col-12-xsmall">
+							<label for="fName">Lugar de destino</label>
+							<input name="lugar_destino" id="lugar_destino" placeholder="Establ. y comuna">
+						</div><div class="col-6 col-12-xsmall">
+							
+							<label for="fName">Kms. estimados a recorrer</label>
+							<input name="kms" id="kms" placeholder="Total kilómetros">
+						</div>
+						</div>
+
+							<div class="form-group">
+								<label for="lName">Costo peajes </label>
+								
+								<div class="col-4 col-12-small">
+									<input type="checkbox" id="check_lateral" name="check" onclick="mostrarPeaje();">
+									<label for="check_lateral">Peaje Lateral</label>
+								</div>
+								<div id="lateral" style="display:none">
+									<div class="row gtr-uniform">
+									<div class="col-6 col-12-xsmall">
+										<input type="text" name="cantidad_lateral" id="cantidad_lateral" value="" placeholder="Cantidad" />
+									</div>	
+									<div class="col-6 col-12-xsmall">
+										<input type="text" name="valor_lateral" id="valor_lateral" value="" placeholder="Valor($)" />
+									</div>	
+									</div>
+								</div>
+								<div class="col-4 col-12-small">
+									<input type="checkbox" id="check_troncal" name="check" onclick="mostrarPeaje();">
+									<label for="check_troncal">Peaje Troncal</label>
+								</div>
+								<div id="troncal" style="display:none">
+									<div class="row gtr-uniform">
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="cantidad_troncal" id="cantidad_troncal" value="" placeholder="Cantidad" />
+										</div>	
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="valor_troncal" id="valor_troncal" value="" placeholder="Valor($)" />
+										</div>	
+										</div>
+									</div>
+								<div class="col-4 col-12-small">
+									<input type="checkbox" id="check_pase" name="check" onclick="mostrarPeaje();" >
+									<label for="check_pase">Pase Diario</label>
+								</div>	<div id="pase" style="display:none">
+									<div class="row gtr-uniform">
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="cantidad_diario" id="cantidad_diario" value="" placeholder="Cantidad" />
+										</div>	
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="valor_diario" id="valor_diario" value="" placeholder="Valor($)" />
+										</div>	
+										</div>
+									</div>
+								
+								
+								
+
+								
+								</div>
+							<input type="button" name="previous" class="previous btn btn-default" value="Previo" />
+							<input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
+						</fieldset>
+
+						<div id="upa">
+							<ul class="actions">
+								<li><a href="/inicio" class="button icon solid solo fa-arrow-up scrolly">Continue</a></li>
+							</ul>						</div>
+							
+							</form>
+							
+							</div>
+						
+							</div>
+
+
+					
+						</div>
+
+ 
+
+
+			<script src="{% static 'js/progressbar.js' %}"></script>
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/jquery.scrollex.min.js' %} "></script>
+			<script src="{% static 'js/jquery.scrolly.min.js' %} "></script>
+			<script src="{% static 'js/browser.min.js' %} "></script>
+			<script src="{% static 'js/breakpoints.min.js' %} "></script>
+			<script src="{% static 'js/util.js' %} "></script>
+			<script src="{% static 'js/main.js' %} "></script>
+
+	</body>
+</html>
