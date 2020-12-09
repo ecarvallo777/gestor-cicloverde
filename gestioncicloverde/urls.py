@@ -29,6 +29,8 @@ urlpatterns = [
     path('vermastrabajadores/', vermastrabajadores),
     path('actualizarClientes/', actualizarClientes),
     path('actualizarTrabajadores/', actualizarTrabajadores),
+    path('gastos/', verGastos),
+    path('agregarGastos/', agregarGastos),
 
 
 
