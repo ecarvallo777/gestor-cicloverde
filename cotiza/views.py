@@ -249,3 +249,8 @@ def agregarGastos(request):
     
 
     return render(request, 'index.html')
+
+def vermasgastos(request):
+    currentGasto= request.GET['id']
+    mesGasto= GastosTotales.objects.get(id=currentGasto)
+    return render(request, 'vermasgastos.html', {'mesGasto':mesGasto})
