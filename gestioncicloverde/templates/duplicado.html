@@ -30,17 +30,21 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">En tiempos de COVID19</h5>
+          <h5 class="modal-title">Error en registro de gastos!</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <p> sads</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Gracias!</button>
-        </div>
+        <form method="get" action="/volverRegistro">
+            <div class="col-12">
+                <h3>¿Estás seguro de que deseas eliminar el registro {{mesGasto.id}}?</h3>
+ 
+                <ul class="actions">
+                    <li><input type="submit" value="Eliminar" class="primary" /></li>
+                </ul>
+            </div>
+        </form>
+        
       </div>
     </div>
   </div>

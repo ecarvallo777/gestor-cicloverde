@@ -40,28 +40,28 @@
             <form method="get" action="/agregarCliente">
                 <div class="row gtr-uniform">
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="nombreOrganizacion" id="nombreOrganizacion" value="" placeholder="Organización" />
+                        <input type="text" name="nombreOrganizacion" id="nombreOrganizacion" value="" placeholder="Organización" required />
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="nombreRepresentante" id="nombreRepresentante" value="" placeholder="Representante" />
+                        <input type="text" name="nombreRepresentante" id="nombreRepresentante" value="" placeholder="Representante" required />
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="run" id="run" value="" placeholder="RUN" />
+                        <input type="number" name="run" id="run" value="" placeholder="RUN Sin puntos ni guión" required/>
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="ciudad" id="ciudad" value="" placeholder="Ciudad" />
+                        <input type="text" name="ciudad" id="ciudad" value="" placeholder="Ciudad" required />
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="celular" id="celular" value="" placeholder="Celular" />
+                        <input type="number" name="celular" id="celular" value="" placeholder="Celular 9xxxxxxxx" required />
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="telefono" id="telefono" value="" placeholder="Teléfono" />
+                        <input type="number" name="telefono" id="telefono" value="" placeholder="Teléfono" />
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="direccion" id="direccion" value="" placeholder="Dirección" />
+                        <input type="text" name="direccion" id="direccion" value="" placeholder="Dirección" required/>
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="email" name="email" id="email" value="" placeholder="Email" />
+                        <input type="email" name="email" id="email" value="" placeholder="Email" required/>
                     </div>
   
 
@@ -106,8 +106,9 @@
 					<div id="main">
 
 						<div class="container">
-							<h1>Clientes</h1>
-                            <h3>Lista de clientes - <a href="" class="button small" data-toggle="modal" data-target="#myModal">Agregar cliente</a></h3>
+							<h1>Clientes <a href="/inicio" class="button icon solid solo fa-arrow-up scrolly"></a>
+                            </h1>
+                            <h3>Lista de clientes - <a href="" class="button small" data-toggle="modal" data-target="#myModal">Agregar cliente</a> </h3>
                             <div class="table-wrapper">
                                 <table class="alt">
                                     <thead>
@@ -143,13 +144,11 @@
                                         {%endfor%}
 
                                 </table>
+                                
                             </div>
+                            
 							</div>
-							<div id="upa">
-								<ul class="actions">
-									<li><a href="/inicio" class="button icon solid solo fa-arrow-up scrolly">Continue</a></li>
-								</ul>						</div>
-							</div>
+							
 
 
 					

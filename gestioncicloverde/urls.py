@@ -33,7 +33,9 @@ urlpatterns = [
     path('agregarGastos/', agregarGastos),
     path('vermasgastos/', vermasgastos),
     path('eliminarRegistro/', eliminarRegistro),
-
-
-
+    path('volverRegistro/', volverRegistro),
+    path('eliminarCliente/', eliminarCliente),
+    path('eliminarTrabajador/', eliminarTrabajador),
 ]
+
+

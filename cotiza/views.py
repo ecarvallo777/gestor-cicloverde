@@ -4,8 +4,9 @@ from cotiza.models import *
 
 def inicio(request):
     all_clients = Clientes.objects.all()
+    all_trabajadores= Trabajadores.objects.all()
 
-    return render(request, 'index.html', {'clientes':all_clients})
+    return render(request, 'index.html', {'clientes':all_clients, 'trabajadores':all_trabajadores})
 
 
 def trabajadores(request):
@@ -257,6 +258,18 @@ def vermasgastos(request):
     mesGasto= GastosTotales.objects.get(id=currentGasto)
     return render(request, 'vermasgastos.html', {'mesGasto':mesGasto})
 
+def eliminarTrabajador(request):
+    currentTrabajador = request.GET['idregistro']
+    eliminate = Trabajadores.objects.get(id=currentTrabajador)
+    eliminate.delete()
+
+    return render(request, 'index.html')
+    
+def eliminarCliente(request):
+    currentCliente = request.GET['idregistro']
+    eliminate = Clientes.objects.get(id=currentCliente)
+    eliminate.delete()
+    return render(request, 'index.html')
 
 def eliminarRegistro(request):
     currentId= request.GET['idregistro']
@@ -274,3 +287,7 @@ def eliminarRegistro(request):
     eliminatePROD.delete()
 
     return render(request, 'gastos.html')
+
+def volverRegistro(request):
+
+    return render(request, 'index.html/')

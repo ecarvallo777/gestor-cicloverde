@@ -52,7 +52,7 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul class="links">
-							<li class="active"><a href="#header">Cotizar transporte</a></li>
+							<li class="active"><a href="#header">Cotizar transporte </a></li>
 							<li><a href="/trabajadores">Trabajadores</a></li>
 							<li><a href="/gastos">Gastos</a></li>
 							<li><a href="/clientes">clientes</a></li>
@@ -66,7 +66,7 @@
 					<div id="main">
 
 						<div class="container">
-							<h1>Cotizar transporte</h1>
+							<h1>Cotizar transporte <a href="/inicio" class="button icon solid solo fa-arrow-up scrolly"></a></h1>
 							<div class="progress">
 							<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
@@ -78,7 +78,7 @@
 									<div class="row gtr-uniform">
 										<div class="col-6 col-12-xsmall">
 									<label for="fName">Búsqueda de cliente:</label>
-									<input list="browsers" name="browser" id="browser" placeholder="Nombre cliente">
+									<input list="browsers" name="browser" id="browser" placeholder="Nombre cliente" required>
 									  <datalist id="browsers">
 										  {%for client in clientes%}
 										<option value="{{client.nombreRepresentante}}">
@@ -87,7 +87,7 @@
 										</div>
 										<div class="col-6 col-12-xsmall">
 									  <label for="fName">Dirección servicio</label>
-							<input name="direccion_servicio" id="direccion_servicio" placeholder="Dirección de servicio">
+							<input name="direccion_servicio" id="direccion_servicio" placeholder="Dirección de servicio" required>
 						</div>
 									</div>
 									
@@ -105,32 +105,16 @@
 
 							  </select>							</div>
 							<div class="form-group">
-							<label for="conductor">Conductor</label>
-							<select name="conductor" id="conductor">
-								<option value="AVALOS">Oscar Avalos
-								</option>
-								<option value="BAHAMONDES">Luis Bahamondes
-								</option>
-								<option value="SAINT">Pelius Saint Yl
+								<label for="conductor">Conductor</label>
+								<select name="conductor" id="conductor">
 
-								</option>
-								<option value="PADILLA">Jorge Padilla
-
-								</option>
-								<option value="REYES">Carla Reyes
-
-								</option>
-								<option value="SALAZAR">Patricia Salazar
-								</option>
-								<option value="LEYTON">Jose Luis Leyton
-
-
-								</option>
-
-
-							  </select>
+								{%for trabajador in trabajadores %}
+								<option value="{{trabajador.id}} ">{{trabajador.nombre}}</option>>
+									{%endfor%}
+							  </select>	
+								
 							 
-							  <input type="text" name="horas_chofer" class="input" placeholder="Horas de trabajo"/>
+							  <input type="number" name="horas_chofer" class="input" placeholder="Horas de trabajo" required/>
 							 								<label>Ayudante</label>
  
 							  <div class="row gtr-uniform">
@@ -148,60 +132,26 @@
 								</div></div>
 
 								<div id="ayudante1" style="display:none">
-									<label>Asistente 1</label>
-									<select name="asistente1" id="asistente1">
-										<option value="AVALOS">Oscar Avalos
-										</option>
-										<option value="BAHAMONDES">Luis Bahamondes
-										</option>
-										<option value="SAINT">Pelius Saint Yl
-		
-										</option>
-										<option value="PADILLA">Jorge Padilla
-		
-										</option>
-										<option value="REYES">Carla Reyes
-		
-										</option>
-										<option value="SALAZAR">Patricia Salazar
-										</option>
-										<option value="LEYTON">Jose Luis Leyton
-		
-		
-										</option>
-		
-		
-									  </select>
-									<input type="text" name="horas_asistente_1" class="input" placeholder="Horas de trabajo"/>
+									<label for="ayudante1">Asistente 1</label>
+								<select name="ayudante1" id="ayudante1_">
+
+								{%for trabajador in trabajadores %}
+								<option value="{{trabajador.id}} ">{{trabajador.nombre}}</option>>
+									{%endfor%}
+							  </select>	
+									<input type="number" name="horas_asistente_1" class="input" placeholder="Horas de trabajo"/>
 									</div>
 
 
 									<div id="ayudante2" style="display:none">
-										<label>Asistente 2</label>
-										<select name="asistente2" id="asistente2">
-											<option value="AVALOS">Oscar Avalos
-											</option>
-											<option value="BAHAMONDES">Luis Bahamondes
-											</option>
-											<option value="SAINT">Pelius Saint Yl
-			
-											</option>
-											<option value="PADILLA">Jorge Padilla
-			
-											</option>
-											<option value="REYES">Carla Reyes
-			
-											</option>
-											<option value="SALAZAR">Patricia Salazar
-											</option>
-											<option value="LEYTON">Jose Luis Leyton
-			
-			
-											</option>
-			
-			
-										  </select>
-									<input type="text" name="horas_asistente_2" class="input" placeholder="Horas de trabajo"/>
+										<label for="ayudante2">Asistente 2</label>
+								<select name="ayudante2" id="ayudante2_">
+
+								{%for trabajador in trabajadores %}
+								<option value="{{trabajador.id}} ">{{trabajador.nombre}}</option>>
+									{%endfor%}
+							  </select>	
+									<input type="number" name="horas_asistente_2" class="input" placeholder="Horas de trabajo"/>
 									</div>
 
 
@@ -295,10 +245,7 @@
 							<input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
 						</fieldset>
 
-						<div id="upa">
-							<ul class="actions">
-								<li><a href="/inicio" class="button icon solid solo fa-arrow-up scrolly">Continue</a></li>
-							</ul>						</div>
+						
 							
 							</form>
 							

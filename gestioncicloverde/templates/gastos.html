@@ -18,6 +18,7 @@
 		<noscript><link rel="stylesheet" href="{% static 'css/noscript.css' %}" /></noscript>
 		<script src="{% static 'js/showGastos.js' %}"></script>
 
+
 	</head>
 
 
@@ -44,7 +45,7 @@
 					<div class="col-6 col-12-xsmall">
 							
 						<label for="fName">Mes</label>
-						<select name="mes" id="mes">
+						<select name="mes" id="mes" >
 							<option value="enero">Enero
 							</option>
 							<option value="febrero">Febrero
@@ -86,100 +87,82 @@
 
 						  </select>
 						  
-						  <div class="col-4 col-12-small">
-							<input type="checkbox" id="check_asesorias" name="check" onclick="mostrarGasto();">
-							<label for="check_asesorias">Asesorías</label>
-						</div>
-						<div class="col-4 col-12-small">
-							<input type="checkbox" id="check_administrativos" name="check" onclick="mostrarGasto();">
-							<label for="check_administrativos">Gastos Admn.</label>
-						</div>
-						<div class="col-4 col-12-small">
-							<input type="checkbox" id="check_produccion" name="check" onclick="mostrarGasto();">
-							<label for="check_produccion">Gastos Prodc.</label>
-						</div>
 						
-						<div id="asesorias" style="display:none">
 							<h6>Ingrese monto de asesorías:</h>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="prevencionista" id="prevencionista" value="" placeholder="($)Prevencionista" />
+								<input type="number" name="prevencionista" id="prevencionista" value="" placeholder="($)Prevencionista" required/>
 							</div>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="sanitizacion" id="sanitizacion" value="" placeholder="($)Sanitizacion" />
+								<input type="number" name="sanitizacion" id="sanitizacion" value="" placeholder="($)Sanitizacion" required />
 							</div>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="contabilidad" id="contabilidad" value="" placeholder="($)Contabilidad" />
+								<input type="number" name="contabilidad" id="contabilidad" value="" placeholder="($)Contabilidad" required />
 							</div>
-						</div>
 
-						<div id="administrativos" style="display:none">
 							<h6>Ingrese monto de gastos administrativos:</h>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="gastos_comunes" id="gastos_comunes" value="" placeholder="($)Gastos comunes" />
+								<input type="number" name="gastos_comunes" id="gastos_comunes" value="" placeholder="($)Gastos comunes" required />
 							</div>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="insumos_aseo" id="insumos_aseo" value="" placeholder="($)Insumos aseo" />
+								<input type="number" name="insumos_aseo" id="insumos_aseo" value="" placeholder="($)Insumos aseo" required />
 							</div>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="insumos_oficina" id="insumos_oficina" value="" placeholder="($)Insumos oficina" />
+								<input type="number" name="insumos_oficina" id="insumos_oficina" value="" placeholder="($)Insumos oficina" required/>
 							</div>
 
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="mantencion_banco" id="mantencion_banco" value="" placeholder="($)Mantención banco" />
+								<input type="number" name="mantencion_banco" id="mantencion_banco" value="" placeholder="($)Mantención banco"  required/>
 							</div>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="TI" id="TI" value="" placeholder="($)TI & Comunicaciones" />
+								<input type="number" name="TI" id="TI" value="" placeholder="($)TI & Comunicaciones" required />
 							</div>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="arriendo" id="arriendo" value="" placeholder="($)Arriendo" />
+								<input type="number" name="arriendo" id="arriendo" value="" placeholder="($)Arriendo" required />
 							</div>
 
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="patentes" id="patentes" value="" placeholder="($)patentes" />
+								<input type="number" name="patentes" id="patentes" value="" placeholder="($)patentes" required />
 							</div>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="encomiendas" id="encomiendas" value="" placeholder="($)encomiendas" />
+								<input type="number" name="encomiendas" id="encomiendas" value="" placeholder="($)encomiendas" required />
 							</div>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="ropa_trabajadores" id="ropa_trabajadores" value="" placeholder="($)Ropa trabajadores" />
+								<input type="number" name="ropa_trabajadores" id="ropa_trabajadores" value="" placeholder="($)Ropa trabajadores" required/>
 							</div>
 
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="permisos_circulacion" id="permisos_circulacion" value="" placeholder="($)Permisos circulación" />
+								<input type="number" name="permisos_circulacion" id="permisos_circulacion" value="" placeholder="($)Permisos circulación" required/>
 							</div>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="generales" id="generales" value="" placeholder="($)Generales" />
+								<input type="number" name="generales" id="generales" value="" placeholder="($)Generales" required/>
 							</div>
 
-						</div>
-						<div id="produccion" style="display:none">
 							<h6>Ingrese monto de gastos de producción:</h>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="electricidad" id="electricidad" value="" placeholder="($)Electricidad" />
+								<input type="number" name="electricidad" id="electricidad" value="" placeholder="($)Electricidad" required/>
 							</div>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="gas_grua" id="gas_grua" value="" placeholder="($)Gas grúa" />
+								<input type="number" name="gas_grua" id="gas_grua" value="" placeholder="($)Gas grúa" required/>
 							</div>
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="petroleo" id="petroleo" value="" placeholder="($)Petróleo" />
-							</div>
-
-							<div class="col-6 col-12-xsmall">
-								<input type="text" name="cordel" id="cordel" value="" placeholder="($)Cordel [48k]" />
-							</div>
-							<div class="col-6 col-12-xsmall">
-								<input type="text" name="insumos_epp" id="insumos_epp" value="" placeholder="($)Insumos EPP" />
-							</div>
-							<div class="col-6 col-12-xsmall">
-								<input type="text" name="mantencion_maquinaria" id="mantencion_maquinaria" value="" placeholder="($)Mantención maquinaria" />
+								<input type="number" name="petroleo" id="petroleo" value="" placeholder="($)Petróleo" required/>
 							</div>
 
 							<div class="col-6 col-12-xsmall">
-								<input type="text" name="insumos_planta" id="insumos_planta" value="" placeholder="($)Insumos planta" />
+								<input type="number" name="cordel" id="cordel" value="" placeholder="($)Cordel [48k]" required/>
+							</div>
+							<div class="col-6 col-12-xsmall">
+								<input type="number" name="insumos_epp" id="insumos_epp" value="" placeholder="($)Insumos EPP" required/>
+							</div>
+							<div class="col-6 col-12-xsmall">
+								<input type="number" name="mantencion_maquinaria" id="mantencion_maquinaria" value="" placeholder="($)Mantención maquinaria" required/>
+							</div>
+
+							<div class="col-6 col-12-xsmall">
+								<input type="number" name="insumos_planta" id="insumos_planta" value="" placeholder="($)Insumos planta" required/>
 							</div>
 							
 
-						</div>
 
 					</div>
 
@@ -216,7 +199,7 @@
 					<div id="main">
 
 						<div class="container">
-							<h1>Gastos totales</h1>
+							<h1>Gastos totales <a href="/inicio" class="button icon solid solo fa-arrow-up scrolly"> </a></h1>
 							<h3>Lista de Gastos totales - <a href="" class="button small" data-toggle="modal" data-target="#myModal">Agregar gastos</a></h3>
                             <div class="table-wrapper">
                                 <table class="alt">

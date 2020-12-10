@@ -31,7 +31,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Agregar cliente</h4>
+          <h4 class="modal-title">Modificar Cliente</h4>
         </div>
         <div class="modal-body">
             <h2>Información básica</h2>
@@ -39,28 +39,28 @@
             <form method="get" action="/actualizarClientes">
                 <div class="row gtr-uniform">
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="nombreOrganizacion" id="nombreOrganizacion" value="{{currentCliente.nombreOrganizacion}}" placeholder="Organización"  />
+                        <input type="text" name="nombreOrganizacion" id="nombreOrganizacion" value="{{currentCliente.nombreOrganizacion}}" placeholder="Organización" required />
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="nombreRepresentante" id="nombreRepresentante" value="{{currentCliente.nombreRepresentante}}" placeholder="Representante" />
+                        <input type="text" name="nombreRepresentante" id="nombreRepresentante" value="{{currentCliente.nombreRepresentante}}" placeholder="Representante" required/>
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="run" id="run" value="{{currentCliente.run}}" placeholder="RUN"  />
+                        <input type="number" name="run" id="run" value="{{currentCliente.run}}" placeholder="RUN Sin puntos ni guión" required />
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="ciudad" id="ciudad" value="{{currentCliente.ciudad}}" placeholder="Ciudad"  />
+                        <input type="text" name="ciudad" id="ciudad" value="{{currentCliente.ciudad}}" placeholder="Ciudad" required />
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="celular" id="celular" value="{{currentCliente.celular}}" placeholder="Celular"  />
+                        <input type="number" name="celular" id="celular" value="{{currentCliente.celular}}" placeholder="Celular 9xxxxxxxx" required />
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="telefono" id="telefono" value=" {{currentCliente.telefono}}" placeholder="telefono" />
+                        <input type="number" name="telefono" id="telefono" value=" {{currentCliente.telefono}}" placeholder="telefono" required/>
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="direccion" id="direccion" value="{{currentCliente.direccion}}" placeholder="direccion"  />
+                        <input type="text" name="direccion" id="direccion" value="{{currentCliente.direccion}}" placeholder="direccion" required />
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="email" name="email" id="email" value="{{currentCliente.email}}" placeholder="email"  />
+                        <input type="email" name="email" id="email" value="{{currentCliente.email}}" placeholder="email" required />
                     </div>
                     <input type="hidden" name="id" value="{{currentCliente.id}}">
 
@@ -81,7 +81,36 @@
   
     </div>
   </div>
-		
+	<!-- Modal -->
+<div id="modalEliminate" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Eliminar registro</h4>
+        </div>
+        <div class="modal-body">
+
+            <form method="get" action="/eliminarCliente">
+                <div class="col-12">
+                    <h3>¿Estás seguro de que deseas eliminar el registro?</h3>
+                    <input type="hidden" name="idregistro" value="{{currentCliente.id}}">
+
+                    <ul class="actions">
+                        <li><input type="button" value="Cancelar" data-dismiss="modal"/></li>
+                        <li><input type="submit" value="Eliminar" class="primary" /></li>
+                    </ul>
+                </div>
+            </form>
+
+        </div>
+
+      </div>
+  
+    </div>
+  </div>	
 
 		
 
@@ -95,8 +124,8 @@
 					<div id="main">
 
 						<div class="container">
-							<h1>{{currentCliente.nombreOrganizacion}} <a href="" class="button small" data-toggle="modal" data-target="#myModal">Modificar</a></h1>
-                            <h2>{{currentCliente.nombreRepresentante}}</h2>
+							<h1>{{currentCliente.nombreOrganizacion}} <a href="" class="button small" data-toggle="modal" data-target="#myModal">Modificar</a><a href="" class="button small" data-toggle="modal" data-target="#modalEliminate">Eliminar</a></h1>
+                            <h2>{{currentCliente.nombreRepresentante}} </h2>
                             <footer id="footer">
 
                             <section class="split contact">

@@ -40,28 +40,28 @@
             <form method="get" action="/agregarTrabajador">
                 <div class="row gtr-uniform">
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="nombre" id="nombre" value="" placeholder="Nombre" />
+                        <input type="text" name="nombre" id="nombre" value="" placeholder="Nombre" required/>
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="sis" id="sis" value="" placeholder="SIS" />
+                        <input type="number" name="sis" id="sis" value="" placeholder="SIS" required/>
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="sueldo_base" id="sueldo_base" value="" placeholder="Sueldo base" />
+                        <input type="number" name="sueldo_base" id="sueldo_base" value="" placeholder="Sueldo base"  required/>
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="achs" id="achs" value="" placeholder="ACHS"/>
+                        <input type="number" name="achs" id="achs" value="" placeholder="ACHS" required/>
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="gratificaciones" id="gratificaciones" value="" placeholder="Gratificaciones" />
+                        <input type="number" name="gratificaciones" id="gratificaciones" value="" placeholder="Gratificaciones"  required/>
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="afc" id="afc" value="" placeholder="AFC" />
+                        <input type="number" name="afc" id="afc" value="" placeholder="AFC"  required/>
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="bonos" id="bonos" value="" placeholder="Bonos" />
+                        <input type="number" name="bonos" id="bonos" value="" placeholder="Bonos"  required/>
                     </div>
                     <div class="col-6 col-12-xsmall">
-                        <input type="text" name="horas_trabajadas" id="horas_trabajadas" value="" placeholder="Horas trabajadas" />
+                        <input type="number" name="horas_trabajadas" id="horas_trabajadas" value="" placeholder="Horas trabajadas"  required/>
                     </div>
   
 
@@ -95,7 +95,7 @@
 					<div id="main">
 
 						<div class="container">
-							<h1>Trabajadores</h1>
+							<h1>Trabajadores <a href="/inicio" class="button icon solid solo fa-arrow-up scrolly"></a></h1>
 							<h3>Lista de trabajadores - <a href="" class="button small" data-toggle="modal" data-target="#myModal">Agregar Trabajador</a></h3>
                             <div class="table-wrapper">
                                 <table class="alt">
@@ -134,10 +134,7 @@
                                 </table>
                             </div>
 							</div>
-							<div id="upa">
-								<ul class="actions">
-									<li><a href="/inicio" class="button icon solid solo fa-arrow-up scrolly">Continue</a></li>
-								</ul>						</div>
+
 							</div>
 
 
