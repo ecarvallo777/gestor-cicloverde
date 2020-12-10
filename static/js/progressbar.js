@@ -3,28 +3,78 @@ $(document).ready(function(){
     steps = $("fieldset").length;
     $(".next").click(function(){
 
-        current_step = $(this).parent();
+            current_step = $(this).parent();
 
             if(current==2){
                 var x = document.forms["regiration_form"]["browser"].value;
+                var horas_chofer = parseFloat(document.forms["regiration_form"]["horas_chofer"].value);
+                var check_ayudante = document.forms["regiration_form"]["uno"].value;
+                var horas_asistente_1 = parseFloat(document.forms["regiration_form"]["horas_asistente_1"].value);
+                var horas_asistente_2 = parseFloat(document.forms["regiration_form"]["horas_asistente_2"].value);
 
-			    if( $("#regiration_form input[name='colacion']:radio").is(':checked') ) { 
-                    next_step = $(this).parent().next();
-                    next_step.show();
-                    current_step.hide();
-                    setProgressBar(++current);
-				    } else{ if () 
-					    alert("Seleccione colación.");  
-                            }  
+
+                            if (horas_chofer>0){
+                                if(check_ayudante=="0"){
+                                    if( $("#regiration_form input[name='colacion']:radio").is(':checked') ) { 
+                                        next_step = $(this).parent().next();
+                                        next_step.show();
+                                        current_step.hide();
+                                        setProgressBar(++current);
+                                        } else{
+                                            alert("Seleccione colación.");  
+                                                }
+
+                                }
+                                else{if (check_ayudante=="1"){
+                                    if (horas_asistente_1>0){
+                                        if( $("#regiration_form input[name='colacion']:radio").is(':checked') ) { 
+                                            next_step = $(this).parent().next();
+                                            next_step.show();
+                                            current_step.hide();
+                                            setProgressBar(++current);
+                                            } else{
+                                                alert("Seleccione colación.");  
+                                                    }
+
+                                    }else{alert("Seleccione horas de asistente 1.");
+
+                                    }
+
+
+                                    
+                                }else{ if (check_ayudante=="2"){
+                                    if (horas_asistente_1>0){
+                                        if ( horas_asistente_2>0){
+                                        if( $("#regiration_form input[name='colacion']:radio").is(':checked') ) { 
+                                            next_step = $(this).parent().next();
+                                            next_step.show();
+                                            current_step.hide();
+                                            setProgressBar(++current);
+                                            } else{
+                                                alert("Seleccione colación.");  
+                                                    }
+                                                }else { alert("Escriba horas de asistente 2.")}
+                                    }else{alert("Escriba horas de asistente 1.");
+
+                                    }
+
+                                }
+                                    }
+                                    }
+                                
+                            }
+                                else{alert("Escriba cantidad de horas de trabajo del chofer.")}
+
+
+
+
+
+			      
                 }
                 
             if(current==1){
-                var horas_chofer = document.forms["regiration_form"]["horas_chofer"].value;
-                var ayudante1 = document.forms["regiration_form"]["ayudante1"].value;
-                var ayudante2 = document.forms["regiration_form"]["ayudante2"].value;
+                var x = document.forms["regiration_form"]["browser"].value;
 
-
-                
                 var y = document.forms["regiration_form"]["direccion_servicio"].value;
                 if (x ==""){
                     alert ("Ingrese nombre de representante");
