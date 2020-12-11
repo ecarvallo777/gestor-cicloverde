@@ -187,8 +187,47 @@
     </div>
   </div>
 		
-		
+		<!-- Modal -->
+<div id="Petroleo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modificar valor petróleo</h4>
+        </div>
+        <div class="modal-body">
+            <h2>Petróleo</h2>
 
+            <form method="get" action="/modPetroleo">
+                <div class="row gtr-uniform">
+                    <div class="col-6 col-12-xsmall">
+                        <input type="number" name="petroleo" id="petroleo" value="" placeholder="Corregir valor" required />
+                    </div>
+                   
+
+                    <!-- Break -->
+                    <div class="col-12">
+                        <ul class="actions">
+                            <li><input type="button" value="Cancelar" data-dismiss="modal"/></li>
+                            <li><input type="submit" value="Modificar" class="primary" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+
+            <hr />
+        </div>
+
+      </div>
+  
+    </div>
+  </div>
+
+
+
+		
 		<!-- Wrapper -->
 			<div id="wrapper" class="fade-in">
 
@@ -200,7 +239,7 @@
 
 						<div class="container">
 							<h1>Gastos totales <a href="/inicio" class="button icon solid solo fa-arrow-up scrolly"> </a></h1>
-							<h3>Lista de Gastos totales - <a href="" class="button small" data-toggle="modal" data-target="#myModal">Agregar gastos</a></h3>
+							<h3>Lista de Gastos totales - <a href="" class="button small" data-toggle="modal" data-target="#myModal">Agregar gastos</a><a href="" class="button small" data-toggle="modal" data-target="#Petroleo">Petróleo</a>: {{petroleo.valor_actual}}</h3>
                             <div class="table-wrapper">
                                 <table class="alt">
                                     <thead>

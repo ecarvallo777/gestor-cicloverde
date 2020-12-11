@@ -36,6 +36,9 @@ urlpatterns = [
     path('volverRegistro/', volverRegistro),
     path('eliminarCliente/', eliminarCliente),
     path('eliminarTrabajador/', eliminarTrabajador),
+    path('modPetroleo', modPetroleo),
+    path('cotizaciones', cotizaciones),
+    path('vermascotizaciones', vermascotizaciones),
 ]
 
 

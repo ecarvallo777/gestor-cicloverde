@@ -1,0 +1,116 @@
+
+<!DOCTYPE HTML>
+{% load static %}
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Gestor interno - Cotizaciones</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/displayform.css' %}"/>
+		<noscript><link rel="stylesheet" href="{% static 'css/noscript.css' %}" /></noscript>
+	</head>
+
+
+
+
+	
+	<body class="is-preload">
+
+
+		
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+		
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="#header">Cotizar transporte</a></li>
+							<li><a href="/sueldos">Sueldos</a></li>
+							<li><a href="/gastos">Gastos</a></li>
+                            <li><a href="/clientes">clientes</a></li>
+                            <li><a href="/cotizaciones">cotizaciones</a></li>
+
+
+						</ul>
+
+					</nav>
+
+
+				
+					<div id="main">
+
+						<div class="container">
+							<h1>Cotizaciones <a href="/inicio" class="button icon solid solo fa-arrow-up scrolly"></a>
+                            </h1>
+                            <h3>Lista de cotizaciones  </h3>
+                            <div class="table-wrapper">
+                                <table class="alt">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Cliente</th>
+                                            <th>Fecha</th>
+                                            <th>Tarifa</th>
+                                            <th>Utilidad</th>
+                                            <th>Gestor</th>
+
+
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for cotizacion in cotizaciones%}
+
+                                        <tr>
+                                            <td>{{cotizacion.id}}</td>
+                                            <td>{{cotizacion.nombre_cliente}}</td>
+                                            <td>{{cotizacion.fecha}}</td>
+                                            <td>{{cotizacion.tarifa}}</td>
+                                            <td>{{cotizacion.utilidad}}</td>
+                                            <td><form action="/vermascotizaciones" method="get">
+                                                <input type="hidden" name="id" value = "{{cotizacion.id}}">
+                                                <input type="submit" name = "send" value="Ver más">
+
+                                                </form></td>
+
+                                        </tr>
+                                        {%endfor%}
+
+                                </table>
+                                
+                            </div>
+                            
+							</div>
+							
+
+
+					
+</div>
+
+ 
+
+
+			<script src="{% static 'js/progressbar.js' %}"></script>
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/jquery.scrollex.min.js' %} "></script>
+			<script src="{% static 'js/jquery.scrolly.min.js' %} "></script>
+			<script src="{% static 'js/browser.min.js' %} "></script>
+			<script src="{% static 'js/breakpoints.min.js' %} "></script>
+			<script src="{% static 'js/util.js' %} "></script>
+			<script src="{% static 'js/main.js' %} "></script>
+
+	</body>
+</html>

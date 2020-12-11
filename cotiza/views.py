@@ -77,7 +77,6 @@ def actualizarTrabajadores(request):
     upTrabajador.total_haberes=float(upTrabajador.sueldo_imponible)+float(upTrabajador.bonos)
     upTrabajador.sueldos=float(upTrabajador.total_haberes)+float(upTrabajador.SIS) +float(upTrabajador.ACHS)+float(upTrabajador.AFC)
     upTrabajador.sueldo_liquido=float(upTrabajador.sueldoBase) + float(upTrabajador.bonos)
-    print(upTrabajador.sueldos)
 
     upTrabajador.costo_hora=float(upTrabajador.sueldos) / float(upTrabajador.horas_trabajadas)
     upTrabajador.costo_dia=float(upTrabajador.costo_hora) *9
@@ -122,12 +121,185 @@ def agregarTrabajador(request):
     return render(request, 'index.html')
 
 def cotizar(request):
+    ###Información básica:
+
+    nombre_organizacion= request.GET["browser"]
+    organizacion = Clientes.objects.get(nombreOrganizacion=nombre_organizacion)
+    run= organizacion.run
+    fecha = request.GET["fecha_requerida"]
+    lugar_origen = request.GET["lugar_origen"]
+    lugar_destino = request.GET["lugar_destino"]
+    lugar_servicio = request.GET["lugar_servicio"]
+    #Vehículo a utilizar  #########################################################################
     vehiculo = request.GET["vehiculo"]
-    conductor = request.GET["conductor"]
+
+    # Costo operativo empresa x hora según vehíchulo ################################################################
+    costo_operativo_empresa = GastosTotales.objects.all().order_by("-id")[0]
+    costo_operativo = float(costo_operativo_empresa.costo_operativo_hora)
+
+    if (vehiculo =="KIA"):
+        costo_operativo = costo_operativo * 1
+    if (vehiculo=="NQR"):
+        costo_operativo = costo_operativo * 2
+
+    # get kms a recorrer ###########################################################################
+    kms=float(request.GET["kms"])
+
+    # get valor actual petroleo 
+    petroleo = Petroleo.objects.get(id=1)
+    petroleo_valor=float(petroleo.valor_actual)
+
+
+    #get petroleo a utilizar ######################################################################
+
+    if (vehiculo == "KIA"):
+        petroleo_necesario = ( kms / 10 ) * petroleo_valor 
+    if (vehiculo == "NQR"):
+        petroleo_necesario = ( kms / 5) * petroleo_valor
+
+    ############ Peajes ###########
+    #Peaje lateral
+    cantidad_lateral=0
+    valor_lateral=0
+    state0_lateral= request.GET["cantidad_lateral"]
+    state1_lateral=request.GET["valor_lateral"]
+    if (state0_lateral != ""): 
+        cantidad_lateral=float(state0_lateral)
+
+    if (state1_lateral !=""):
+        valor_lateral= float(state1_lateral)
+
+    #Peaje troncal
+    cantidad_troncal=0
+    valor_troncal=0
+    state0_troncal = request.GET["cantidad_troncal"]
+    state1_troncal = request.GET["valor_troncal"]
+
+    if(state0_troncal != ""):
+        cantidad_troncal = float(state0_troncal)
+    if (state1_troncal !=""):
+        valor_troncal= float(state1_troncal) 
+                            
+    #Pase diario
+    cantidad_diario=0
+    valor_diario=0
+    state0_diario= request.GET["cantidad_diario"]
+    state1_diario=request.GET["valor_diario"]
+    if (state0_diario !=""):
+        cantidad_diario= float(state0_diario)
+    if (state1_diario !=""):
+        valor_diario= float(state1_diario)
+
+    # Suma de peajes ##############################################################
+    sum_peajes = (cantidad_lateral*valor_lateral)+(cantidad_troncal*valor_troncal)+(cantidad_diario*valor_diario)
+
+    #### Conductor y asistente ####
+    ### Chofer
+    #id
+    id_chofer= request.GET["conductor"]
+    #Costo x chofer
+    chofer=Trabajadores.objects.get(id=id_chofer)   
+
+    costo_chofer= float(chofer.costo_hora)
+    #Nombre chofer
+    nombre_chofer = chofer.nombre 
+
+    #horas trabajadas chofer
+    horas_chofer = float(request.GET["horas_chofer"])
+
+    # Horas x costo chofer/hora ###################################################
+    chofer_horas = costo_chofer * horas_chofer
+
+    ### Asistente 1
+    asistentes=0
+    #id 
+    id_asistente1= request.GET["ayudante1"]
+    asistente1_horas=0
+    nombre_asistente1 =""
+    horas_asistente1=0
+    if(id_asistente1 != ""):
+        asistentes= asistentes+1
+        #Costo x asistente
+        asistente1 = Trabajadores.objects.get(id=id_asistente1)
+        costo_asistente1 = float(asistente1.costo_hora)
+
+        #Nombre asistente 1
+        nombre_asistente1 = asistente1.nombre
+
+        #Horas trabajadas asistente 1
+        horas_asistente1 = request.GET["horas_asistente_1"]
+
+        #Horas x costo asistente1/hora #################################################
+        if(horas_asistente1 != ""):
+            horas_asistente1 = float(horas_asistente1)
+            if (horas_asistente1>0):
+                        asistente1_horas = costo_asistente1 * horas_asistente1
+
+
+    #Asistente 2:
+    #id
+    id_asistente2 = request.GET["ayudante2"]
+    asistente2_horas=0
+    nombre_asistente2 =""
+    horas_asistente2=0
+    if(id_asistente2 != ""):
+        asistentes=asistentes+1
+        #Costo x asistente
+        asistente2 = Trabajadores.objects.get(id=id_asistente2)
+        costo_asistente2 = float(asistente2.costo_hora)
+
+        #Nombre asistente 2
+        nombre_asistente2=asistente2.nombre
+
+        #Horas trabajadas asistente 2:
+        horas_asistente2 = float(request.GET["horas_asistente_2"])
+
+        #Horas x costo asistente2/hora #################################################
+        if(horas_asistente2 != ""):
+            horas_asistente2 = float(horas_asistente2)
+            if (horas_asistente2>0):
+                        asistente2_horas = costo_asistente2 * horas_asistente2
+
+    ########Colaciones
     colacion = request.GET["colacion"]
+    valor_colacion=0
+    if (colacion=="si"):
+        valor_colacion=5000
+        if(id_asistente1 !="" ):
+            valor_colacion=valor_colacion+(5000)
+            if(id_asistente2 !=""):
+                valor_colacion=valor_colacion+5000
 
+    ## CALCULOS!!
+    costo_total= costo_operativo + petroleo_necesario + sum_peajes + chofer_horas +  asistente1_horas + asistente2_horas + valor_colacion
+    utilidad30= costo_total*0.3
+    tarifa = costo_total+utilidad30
+    m3 = tarifa/15
 
-    return render(request, 'cotizar.html', {'vehiculo':vehiculo, 'conductor':conductor, 'colacion':colacion})
+    i = todo (nombre_cliente=nombre_organizacion,
+                run=run,
+                vehiculo=vehiculo,
+                conductor=nombre_chofer,
+                horas_conductor=horas_chofer,
+                cant_ayudantes=asistentes,
+                nombre_asistente1=nombre_asistente1,
+                horas_asistente1=horas_asistente1,
+                nombre_asistente2=nombre_asistente2,
+                horas_asistente2=horas_asistente2,
+                valor_colaciones=valor_colacion,
+                lugar_origen=lugar_origen,
+                lugar_destino=lugar_destino,
+                lugar_servicio=lugar_servicio,
+                suma_peajes=sum_peajes,
+                costo_total=costo_total,
+                utilidad=utilidad30,
+                tarifa=tarifa,
+                m3=m3,
+                fecha=fecha,
+
+            ).save()
+
+    return render(request, 'index.html')
 
 def vermasclientes(request):
 
@@ -150,7 +322,8 @@ def vermastrabajadores(request):
 def verGastos(request):
 
     all_gastos = GastosTotales.objects.all()
-    return render(request, 'gastos.html', {'all_gastos':all_gastos})
+    petroleo = Petroleo.objects.get(id=1)
+    return render(request, 'gastos.html', {'all_gastos':all_gastos, 'petroleo':petroleo})
 
 def agregarGastos(request):
 
@@ -286,8 +459,27 @@ def eliminarRegistro(request):
     eliminatePROD= GastosProduccion.objects.get(mes=currentMes)
     eliminatePROD.delete()
 
-    return render(request, 'gastos.html')
+    return render(request, 'index.html')
 
 def volverRegistro(request):
 
     return render(request, 'index.html/')
+
+def modPetroleo(request):
+
+
+    getPetroleo= request.GET["petroleo"]
+    actual = Petroleo.objects.get(id=1)
+    actual.valor_actual = getPetroleo
+    actual.save()
+
+    return render(request, 'index.html')
+
+def cotizaciones(request):
+
+    all_cotizaciones = todo.objects.all()
+
+    return render(request, 'cotizaciones.html', {'cotizaciones':all_cotizaciones})
+
+def vermascotizaciones(request):
+    return render(request, 'vermascotizaciones.html')

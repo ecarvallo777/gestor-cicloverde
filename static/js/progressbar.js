@@ -75,13 +75,13 @@ $(document).ready(function(){
             if(current==1){
                 var x = document.forms["regiration_form"]["browser"].value;
 
-                var y = document.forms["regiration_form"]["direccion_servicio"].value;
+                var y = document.forms["regiration_form"]["fecha_requerida"].value;
                 if (x ==""){
-                    alert ("Ingrese nombre de representante");
+                    alert ("Ingrese nombre de organización.");
                     
                     } else{ 
                         if (y ==""){
-                            alert("Ingrese la direccion de servicio.");
+                            alert("Ingrese la fecha de servicio.");
                             } else {
                                     next_step = $(this).parent().next();
                                     next_step.show();

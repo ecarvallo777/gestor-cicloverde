@@ -13,7 +13,7 @@ function mostrarPeaje(){
             document.getElementById('troncal').style.display="none";
         }
 
-    if (document.getElementById('check_pase').checked) {
+    if (document.getElementById('check_diario').checked) {
         document.getElementById('pase').style.display="block";}
         else {
             document.getElementById('pase').style.display="none";

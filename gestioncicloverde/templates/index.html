@@ -55,7 +55,9 @@
 							<li class="active"><a href="#header">Cotizar transporte </a></li>
 							<li><a href="/trabajadores">Trabajadores</a></li>
 							<li><a href="/gastos">Gastos</a></li>
-							<li><a href="/clientes">clientes</a></li>
+							<li><a href="/clientes">Clientes</a></li>
+							<li><a href="/cotizaciones">Cotizaciones</a></li>
+
 
 						</ul>
 
@@ -81,13 +83,13 @@
 									<input list="browsers" name="browser" id="browser" placeholder="Nombre cliente" required>
 									  <datalist id="browsers">
 										  {%for client in clientes%}
-										<option value="{{client.nombreRepresentante}}">
+										<option value="{{client.nombreOrganizacion}}">
 											{%endfor%}
 									  </datalist>
 										</div>
 										<div class="col-6 col-12-xsmall">
-									  <label for="fName">Dirección servicio</label>
-							<input name="direccion_servicio" id="direccion_servicio" placeholder="Dirección de servicio" required>
+									  <label for="fName">Fecha requerida</label>
+							<input type ="date" name="fecha_requerida" id="fecha_requerida" placeholder="fecha requerida" required>
 						</div>
 									</div>
 									
@@ -133,24 +135,26 @@
 
 								<div id="ayudante1" style="display:none">
 									<label for="ayudante1">Asistente 1</label>
-								<select name="ayudante1" id="ayudante1_">
-
-								{%for trabajador in trabajadores %}
-								<option value="{{trabajador.id}} ">{{trabajador.nombre}}</option>>
-									{%endfor%}
-							  </select>	
+									<input list="ayudante1s" name="ayudante1" id="ayudante1" placeholder="Nombre asistente 1" required>
+									<datalist id="ayudante1s">
+									  {%for trabajador in trabajadores %}
+									  <option value="{{trabajador.id}} ">{{trabajador.nombre}}</option>>
+										  {%endfor%}
+									</datalist>
 									<input type="number" name="horas_asistente_1" class="input" placeholder="Horas de trabajo"/>
 									</div>
 
 
 									<div id="ayudante2" style="display:none">
 										<label for="ayudante2">Asistente 2</label>
-								<select name="ayudante2" id="ayudante2_">
 
-								{%for trabajador in trabajadores %}
-								<option value="{{trabajador.id}} ">{{trabajador.nombre}}</option>>
-									{%endfor%}
-							  </select>	
+										<input list="ayudante2s" name="ayudante2" id="ayudante2" placeholder="Nombre asistente 2" required>
+									  <datalist id="ayudante2s">
+										{%for trabajador in trabajadores %}
+										<option value="{{trabajador.id}} ">{{trabajador.nombre}}</option>>
+											{%endfor%}
+									  </datalist>
+								
 									<input type="number" name="horas_asistente_2" class="input" placeholder="Horas de trabajo"/>
 									</div>
 
@@ -187,7 +191,7 @@
 						</div><div class="col-6 col-12-xsmall">
 							
 							<label for="fName">Kms. estimados a recorrer</label>
-							<input name="kms" id="kms" placeholder="Total kilómetros">
+							<input type="number" name="kms" id="kms" placeholder="Total kilómetros" value="0" required>
 						</div>
 						</div>
 
@@ -195,7 +199,7 @@
 								<label for="lName">Costo peajes </label>
 								
 								<div class="col-4 col-12-small">
-									<input type="checkbox" id="check_lateral" name="check" onclick="mostrarPeaje();">
+									<input type="checkbox" id="check_lateral" name="check_lateral" onclick="mostrarPeaje();">
 									<label for="check_lateral">Peaje Lateral</label>
 								</div>
 								<div id="lateral" style="display:none">
@@ -210,6 +214,7 @@
 								</div>
 								<div class="col-4 col-12-small">
 									<input type="checkbox" id="check_troncal" name="check" onclick="mostrarPeaje();">
+
 									<label for="check_troncal">Peaje Troncal</label>
 								</div>
 								<div id="troncal" style="display:none">
@@ -223,8 +228,8 @@
 										</div>
 									</div>
 								<div class="col-4 col-12-small">
-									<input type="checkbox" id="check_pase" name="check" onclick="mostrarPeaje();" >
-									<label for="check_pase">Pase Diario</label>
+									<input type="checkbox" id="check_diario" name="check_diario" onclick="mostrarPeaje();" >
+									<label for="check_diario">Pase Diario</label>
 								</div>	<div id="pase" style="display:none">
 									<div class="row gtr-uniform">
 										<div class="col-6 col-12-xsmall">
