@@ -103,6 +103,8 @@ class todo(models.Model):
     vehiculo = models.CharField(max_length=3)
     conductor = models.CharField(max_length=100)
     horas_conductor = models.DecimalField(max_digits=8, decimal_places=1)
+    kms = models.DecimalField(max_digits=8, decimal_places=1)
+
     #Ayudantes
     cant_ayudantes=models.IntegerField()
 

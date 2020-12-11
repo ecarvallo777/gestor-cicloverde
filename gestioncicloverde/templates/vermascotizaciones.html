@@ -23,64 +23,7 @@
 
 	
 	<body class="is-preload">
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-  
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modificar Cliente</h4>
-        </div>
-        <div class="modal-body">
-            <h2>Información básica</h2>
 
-            <form method="get" action="/actualizarClientes">
-                <div class="row gtr-uniform">
-                    <div class="col-6 col-12-xsmall">
-                        <input type="text" name="nombreOrganizacion" id="nombreOrganizacion" value="{{currentCliente.nombreOrganizacion}}" placeholder="Organización" required />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <input type="text" name="nombreRepresentante" id="nombreRepresentante" value="{{currentCliente.nombreRepresentante}}" placeholder="Representante" required/>
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <input type="number" name="run" id="run" value="{{currentCliente.run}}" placeholder="RUN Sin puntos ni guión" required />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <input type="text" name="ciudad" id="ciudad" value="{{currentCliente.ciudad}}" placeholder="Ciudad" required />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <input type="number" name="celular" id="celular" value="{{currentCliente.celular}}" placeholder="Celular 9xxxxxxxx" required />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <input type="number" name="telefono" id="telefono" value=" {{currentCliente.telefono}}" placeholder="telefono" required/>
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <input type="text" name="direccion" id="direccion" value="{{currentCliente.direccion}}" placeholder="direccion" required />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <input type="email" name="email" id="email" value="{{currentCliente.email}}" placeholder="email" required />
-                    </div>
-                    <input type="hidden" name="id" value="{{currentCliente.id}}">
-
-                    <!-- Break -->
-                    <div class="col-12">
-                        <ul class="actions">
-                            <li><input type="button" value="Cancelar" data-dismiss="modal"/></li>
-                            <li><input type="submit" value="Guardar" class="primary" /></li>
-                        </ul>
-                    </div>
-                </div>
-            </form>
-
-            <hr />
-        </div>
-
-      </div>
-  
-    </div>
-  </div>
 	<!-- Modal -->
 <div id="modalEliminate" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -93,10 +36,10 @@
         </div>
         <div class="modal-body">
 
-            <form method="get" action="/eliminarCliente">
+            <form method="get" action="/eliminarCotizacion">
                 <div class="col-12">
                     <h3>¿Estás seguro de que deseas eliminar el registro?</h3>
-                    <input type="hidden" name="idregistro" value="{{currentCliente.id}}">
+                    <input type="hidden" name="idregistro" value="{{viewCotizacion.id}}">
 
                     <ul class="actions">
                         <li><input type="button" value="Cancelar" data-dismiss="modal"/></li>
@@ -124,38 +67,96 @@
 					<div id="main">
 
 						<div class="container">
-							<h1>{{currentCliente.nombreOrganizacion}} <a href="" class="button small" data-toggle="modal" data-target="#myModal">Modificar</a><a href="" class="button small" data-toggle="modal" data-target="#modalEliminate">Eliminar</a></h1>
-                            <h2>{{currentCliente.nombreRepresentante}} </h2>
+							<h1>{{viewCotizacion.nombre_cliente}} <a href="" class="button small" data-toggle="modal" data-target="#modalEliminate">Eliminar</a></h1>
+                            <h2>id_cotizacion: {{viewCotizacion.id}} RUN: {{viewCotizacion.run}} </h2>
                             <footer id="footer">
 
                             <section class="split contact">
 
-
+                  
                                 <section class="alt">
-                                    <h3>Contacto</h3>
-                                    <p>{{currentCliente.email}}<br />
-                                    {{currentCliente.celular}}<br />
-                                                
-                                                {{currentCliente.telefono}}</p>
+                                    <h3>Fecha</h3>
+                                    <p>{{viewCotizacion.fecha}}<br />
+                                                </p>
                                     </section>
                                 <section>
-                                    <h3>Run</h3>
-                                    <p>{{currentCliente.run}}</p>
+                                    <h3>Conductor</h3>
+                                    <p>{{viewCotizacion.conductor}}</p>
                                 </section>
                                 <section>
-                                    <h3>Ciudad</h3>
-                                    <p>{{currentCliente.ciudad}}</p>
+                                    <h3>Vehículo</h3>
+                                    <p>{{viewCotizacion.vehiculo}}</p>
                                 </section>
                                 <section>
-                                    <h3>Dirección</h3>
-                                    <p>{{currentCliente.direccion}}</p>
+                                    <h3>Horas conductor</h3>
+                                    <p>{{viewCotizacion.horas_conductor}}</p>
                                 </section>
-                               
-                               
+                                <section>
+                                    <h3>Kms. recorridos</h3>
+                                    <p>{{viewCotizacion.kms}}</p>
+                                </section>
+                                <section>
+                                    <h3>Cantidad Asist.</h3>
+                                    <p>{{viewCotizacion.cant_ayudantes}}</p>
+                                </section>
+                                <section>
+                                    <h3>Asist. 1</h3>
+                                    <p>{{viewCotizacion.nombre_asistente1}}
+                                        horas: {{viewCotizacion.horas_asistente1}}
+                                    </p>                                </section>
+
+                                    <section>
+                                        <h3>Asist. 2</h3>
+                                        <p>{{viewCotizacion.nombre_asistente2}}
+                                            horas: {{viewCotizacion.horas_asistente2}}
+                                        </p>
+                                    
+                                </section>
+                                <section>
+                                    <h3>Colaciones</h3>
+                                    <p>{{viewCotizacion.valor_colaciones}}</p>
+                                </section>
+                                <section>
+                                    <h3>Peajes</h3>
+                                    <p>{{viewCotizacion.suma_peajes}}</p>
+                                </section>
+                            </section>
+                            <section>
+                                <section>
+                                    <h3>Lugar origen</h3>
+                                    <p>{{viewCotizacion.lugar_origen}}</p>
+                                </section>
+                                <section>
+                                    <h3>Lugar destino</h3>
+                                    <p>{{viewCotizacion.lugar_destino}}</p>
+                                </section>
+                                <section>
+                                    <h3>Lugar servicio</h3>
+                                    <p>{{viewCotizacion.lugar_servicio}}</p>
+                                </section>
+                                
+                            </section>
+                            <section>
+                                <section>
+                                    <h3>Costo total</h3>
+                                    <p>{{viewCotizacion.costo_total}}</p>
+                                </section>
+                                <section>
+                                    <h3>Utilidad</h3>
+                                    <p>{{viewCotizacion.utilidad}}</p>
+                                </section>
+                                <section>
+                                    <h3>Tarifa</h3>
+                                    <p>{{viewCotizacion.tarifa}}</p>
+                                </section>
+                                <section>
+                                    <h3>m3.</h3>
+                                    <p>{{viewCotizacion.m3}}</p>
+                                </section>
                             </section>
                             <div id="upa">
 								<ul class="actions">
-									<li><a href="/clientes" class="button icon solid solo fa-arrow-left scrolly">Continue</a></li>
+									<li><a href="/cotizaciones" class="button icon solid solo fa-arrow-left scrolly">Continue</a></li>
 								</ul>						</div>
                             </footer>
 						</div>

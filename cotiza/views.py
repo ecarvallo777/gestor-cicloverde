@@ -296,6 +296,7 @@ def cotizar(request):
                 tarifa=tarifa,
                 m3=m3,
                 fecha=fecha,
+                kms=kms
 
             ).save()
 
@@ -482,4 +483,14 @@ def cotizaciones(request):
     return render(request, 'cotizaciones.html', {'cotizaciones':all_cotizaciones})
 
 def vermascotizaciones(request):
-    return render(request, 'vermascotizaciones.html')
+
+    currentCotizacion= request.GET['id']
+    viewCotizacion = todo.objects.get(id=currentCotizacion)
+
+    return render(request, 'vermascotizaciones.html', {'viewCotizacion': viewCotizacion})
+
+def eliminarCotizacion(request):
+    eliminate = request.GET['idregistro']
+    bdeliminate = todo.objects.get(id=eliminate)
+    bdeliminate.delete()
+    return render(request, 'index.html')

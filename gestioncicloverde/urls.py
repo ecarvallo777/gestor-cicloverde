@@ -39,6 +39,7 @@ urlpatterns = [
     path('modPetroleo', modPetroleo),
     path('cotizaciones', cotizaciones),
     path('vermascotizaciones', vermascotizaciones),
+    path('eliminarCotizacion', eliminarCotizacion)
 ]
 
 
